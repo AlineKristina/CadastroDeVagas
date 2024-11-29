@@ -4,38 +4,62 @@
 
 <h3>Cadastro de Candidato</h3>
 
-<EditForm Model="newCandidate" OnValidSubmit="HandleValidSubmit" >
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div>
-        <label>Nome:</label>
-        <InputText @bind-Value="newCandidate.Name" />
-    </div>
-    <div>
-        <label>Email:</label>
-        <InputText @bind-Value="newCandidate.Email" />
-    </div>
-    <div>
-        <label>Telefone:</label>
-        <InputText @bind-Value="newCandidate.Phone" />
-    </div>
-    <div>
-        <label>Tipo de Documento:</label>
-        <InputText @bind-Value="newCandidate.Document.Type" />
-    </div>
-    <div>
-        <label>Número do Documento:</label>
-        <InputText @bind-Value="newCandidate.Document.Number" />
-    </div>
-    <div>
-        <label>Endereço:</label>
-        <InputText @bind-Value="newCandidate.Address.Street" placeholder="Rua" />
-        <InputText @bind-Value="newCandidate.Address.City" placeholder="Cidade" />
-        <InputText @bind-Value="newCandidate.Address.State" placeholder="Estado" />
-        <InputText @bind-Value="newCandidate.Address.ZipCode" placeholder="CEP" />
-    </div>
-    <button type="submit">Cadastrar</button>
-</EditForm>
+<Modal @ref="modal" title="Cadastro de candidato" IsVerticallyCentered="true" IsScrollable="true">
+    <BodyTemplate>
+        <EditForm Model="newCandidate" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div>
+                <label>Nome:</label>
+                <InputText @bind-Value="newCandidate.Name" />
+            </div>
+            <div>
+                <label>Email:</label>
+                <InputText @bind-Value="newCandidate.Email" />
+            </div>
+            <div>
+                <label>Telefone:</label>
+                <InputText @bind-Value="newCandidate.Phone" />
+            </div>
+            <div>
+                <label>Tipo de Documento:</label>
+                <InputText @bind-Value="newCandidate.Document.Type" />
+            </div>
+            <div>
+                <label>Número do Documento:</label>
+                <InputText @bind-Value="newCandidate.Document.Number" />
+            </div>
+            <div>
+                <label>Endereço:</label>
+                <InputText @bind-Value="newCandidate.Address.Street" placeholder="Rua" />
+                <InputText @bind-Value="newCandidate.Address.City" placeholder="Cidade" />
+                <InputText @bind-Value="newCandidate.Address.State" placeholder="Estado" />
+                <InputText @bind-Value="newCandidate.Address.ZipCode" placeholder="CEP" />
+            </div>
+            <button type="submit">Cadastrar</button>
+        </EditForm>
+    </BodyTemplate>
+    <FooterTemplate>
+        <Button Color="ButtonColor.Secondary" @onclick="OnHideModalClick">Close</Button>
+        <Button Color="ButtonColor.Primary" @onclick=OnHideModalClick>Save changes</Button>
+    </FooterTemplate>
+</Modal>
+
+<Button Color="ButtonColor.Primary" @onclick="OnShowModalClick">Cadastro de curriculo</Button>
+
+@code {
+    private Modal modal = default!;
+
+    private async Task OnShowModalClick()
+    {
+        await modal.ShowAsync();
+    }
+
+    private async Task OnHideModalClick()
+    {
+        await modal.HideAsync();
+    }
+}
 
 @code {
     private CandidateModel newCandidate = new(){
