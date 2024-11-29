@@ -1,0 +1,23 @@
+﻿@page "/candidate"
+@using global::Data.Candidate
+@inject CandidateService CandidatesService
+
+<h3>Área do candidato</h3>
+
+@if (candidate == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>@candidate?.Name</div>
+}
+
+@code {
+    private CandidateModel candidate;
+
+    protected override async Task OnInitializedAsync()
+    {
+        candidate = (await CandidatesService.GetAsync())?.FirstOrDefault();
+    }
+}

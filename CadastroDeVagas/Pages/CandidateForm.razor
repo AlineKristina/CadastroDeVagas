@@ -1,0 +1,71 @@
+﻿@page "/candidate-form"
+@using global::Data.Candidate
+@inject CandidateService CandidateService
+
+<h3>Cadastro de Candidato</h3>
+
+<Alert Message="@alertMessage" AlertType="@alertType" Show="@showAlert" />
+
+<EditForm Model="newCandidate" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label>Nome:</label>
+        <InputText @bind-Value="newCandidate.Name" />
+    </div>
+    <div>
+        <label>Email:</label>
+        <InputText @bind-Value="newCandidate.Email" />
+    </div>
+    <div>
+        <label>Telefone:</label>
+        <InputText @bind-Value="newCandidate.Phone" />
+    </div>
+    <div>
+        <label>Tipo de Documento:</label>
+        <InputText @bind-Value="newCandidate.Document.Type" />
+    </div>
+    <div>
+        <label>Número do Documento:</label>
+        <InputText @bind-Value="newCandidate.Document.Number" />
+    </div>
+    <div>
+        <label>Endereço:</label>
+        <InputText @bind-Value="newCandidate.Address.Street" placeholder="Rua" />
+        <InputText @bind-Value="newCandidate.Address.City" placeholder="Cidade" />
+        <InputText @bind-Value="newCandidate.Address.State" placeholder="Estado" />
+        <InputText @bind-Value="newCandidate.Address.ZipCode" placeholder="CEP" />
+    </div>
+    <button type="submit">Cadastrar</button>
+</EditForm>
+
+@code {
+    private CandidateModel newCandidate = new(){
+        Address = new(),
+        Document = new()
+    };
+
+    private string alertMessage;
+    private string alertType;
+    private bool showAlert;
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            await CandidateService.CreateAsync(newCandidate);
+            alertMessage = "Cadastro realizado com sucesso!";
+            alertType = "alert-success";
+            showAlert = true;
+
+            newCandidate = new CandidateModel();
+        }
+        catch (Exception ex)
+        {
+            alertMessage = $"Erro ao realizar cadastro: {ex.Message}";
+            alertType = "alert-danger";
+            showAlert = true;
+        }
+    }
+}
