@@ -4,12 +4,9 @@
 
 <h3>Cadastro de Candidato</h3>
 
-<Alert Message="@alertMessage" AlertType="@alertType" Show="@showAlert" />
-
-<EditForm Model="newCandidate" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="newCandidate" OnValidSubmit="HandleValidSubmit" >
     <DataAnnotationsValidator />
     <ValidationSummary />
-
     <div>
         <label>Nome:</label>
         <InputText @bind-Value="newCandidate.Name" />
@@ -46,26 +43,21 @@
         Document = new()
     };
 
-    private string alertMessage;
-    private string alertType;
-    private bool showAlert;
-
     private async Task HandleValidSubmit()
     {
         try
         {
             await CandidateService.CreateAsync(newCandidate);
-            alertMessage = "Cadastro realizado com sucesso!";
-            alertType = "alert-success";
-            showAlert = true;
 
-            newCandidate = new CandidateModel();
+            newCandidate = new CandidateModel()
+            {
+                    Address=new(),
+                    Document = new()
+            };
         }
         catch (Exception ex)
         {
-            alertMessage = $"Erro ao realizar cadastro: {ex.Message}";
-            alertType = "alert-danger";
-            showAlert = true;
+            throw;
         }
     }
 }

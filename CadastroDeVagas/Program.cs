@@ -10,6 +10,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.Configure<MongoDbSettings>(
     builder.Configuration.GetSection("MongoDb"));
 builder.Services.AddSingleton<CandidateService>();
+builder.Services.AddBlazorBootstrap();
 
 var app = builder.Build();
 
