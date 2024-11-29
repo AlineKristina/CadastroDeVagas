@@ -1,24 +1,20 @@
 ﻿@inherits LayoutComponentBase
 
 <BlazorBootstrapLayout StickyHeader="true">
-    @* <HeaderSection >
+    <HeaderSection>
         <ThemeSwitcher Class="ps-3 ps-lg-2" />
-    </HeaderSection> *@
+    </HeaderSection>
 
-    
-
-    @* <SidebarSection>
+    <SidebarSection>
         <Sidebar2 Href="/"
                   ImageSrc="https://demos.blazorbootstrap.com/images/logo/logo-white.svg"
                   Title="Blazor Bootstrap"
                   BadgeText="3.3.1"
                   DataProvider="Sidebar2DataProvider"
                   WidthUnit="Unit.Px" />
-    </SidebarSection> *@
+    </SidebarSection>
 
     <ContentSection>
-        <Menu></Menu>
-
         @Body
     </ContentSection>
 

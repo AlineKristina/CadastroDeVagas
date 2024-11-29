@@ -1,5 +1,10 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: rgba(15, 181, 174, 0.04)
+}
+
+.left {
+    align-self: flex-start
 }
 
 h1:focus {
@@ -60,3 +65,32 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+.nav-menu {
+    display: flex;
+    justify-content: space-between
+}
+
+.nav-menu-buttons {
+    display: flex;
+    margin: 16px 0 16px 0;
+    width: 30%;
+    align-items: center;
+}
+
+.nav-menu-button {
+    padding: 0 16px 0 16px;
+    margin-right: 16px;
+    height: 60%;
+    border-left: 1px solid rgba(15, 181, 174, 0.2);
+    border-right: 1px solid rgba(15, 181, 174, 0.2);
+    align-items: center;
+}
+
+.mr-1 {
+    margin-right: 16px
+}
+
+.button {
+    background-color: rgba(15, 181, 174, 0.2);
+    border-radius: 4px
+}
